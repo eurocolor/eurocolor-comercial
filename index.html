@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reporte de Visita Comercial — Eurocolor</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:#f0f6fd;min-height:100vh;padding:2rem 1rem}
+.form-wrap{max-width:680px;margin:0 auto;padding-bottom:4rem}
+.form-header{background:#fff;border-radius:16px;padding:1.75rem 1.5rem 1.5rem;margin-bottom:1rem;border:0.5px solid #B5D4F4}
+.logo-row{display:flex;align-items:center;gap:10px;margin-bottom:1rem}
+.logo-dot{width:10px;height:10px;background:#378ADD;border-radius:50%}
+.logo-name{font-size:13px;font-weight:500;color:#378ADD;letter-spacing:0.5px}
+.form-title{font-size:22px;font-weight:500;color:#1a1a18;letter-spacing:-0.5px;margin-bottom:4px}
+.form-sub{font-size:13px;color:#888780}
+.section{background:#fff;border:0.5px solid #B5D4F4;border-radius:16px;padding:1.25rem 1.5rem;margin-bottom:1rem}
+.section-title{font-size:11px;font-weight:500;color:#185FA5;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:0.5px solid #B5D4F4}
+.field{margin-bottom:1rem}
+.field:last-child{margin-bottom:0}
+.field label{display:block;font-size:13px;color:#5F5E5A;margin-bottom:6px;font-weight:500}
+.req{color:#E24B4A}
+.field input,.field textarea,.field select{width:100%;font-family:'DM Sans',sans-serif;font-size:14px;color:#1a1a18;background:#f9f8f5;border:0.5px solid #D3D1C7;border-radius:10px;padding:10px 13px;outline:none;transition:border-color 0.15s,background 0.15s}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:#378ADD;background:#fff;box-shadow:0 0 0 3px rgba(55,138,221,0.08)}
+.field input.error,.field textarea.error,.field select.error{border-color:#E24B4A !important;background:#fff8f8 !important}
+.field textarea{resize:vertical;min-height:80px;line-height:1.6}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;background-color:#f9f8f5}
+.field-error-msg{font-size:11px;color:#E24B4A;margin-top:4px;display:none}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:500px){.field-row{grid-template-columns:1fr}}
+.fhint{font-size:11px;color:#B4B2A9;margin-bottom:10px}
+.chip-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.chip{display:flex;align-items:center;gap:9px;padding:9px 12px;border:0.5px solid #e0dfd8;border-radius:10px;cursor:pointer;font-size:13px;color:#2C2C2A;background:#f9f8f5;user-select:none;transition:all 0.12s}
+.chip:hover{border-color:#378ADD;background:#f0f6fd}
+.chip.on{border-color:#378ADD;background:#E6F1FB;color:#0C447C}
+.chip-box{width:17px;height:17px;border:1.5px solid #D3D1C7;border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#fff;transition:all 0.12s}
+.chip.on .chip-box{background:#378ADD;border-color:#378ADD}
+.chip-check{display:none;width:10px;height:10px}
+.chip.on .chip-check{display:block}
+.radio-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.radio-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+@media(max-width:500px){.radio-grid,.radio-grid-3{grid-template-columns:1fr 1fr}}
+.rchip{display:flex;align-items:center;gap:9px;padding:9px 12px;border:0.5px solid #e0dfd8;border-radius:10px;cursor:pointer;font-size:13px;color:#2C2C2A;background:#f9f8f5;user-select:none;transition:all 0.12s}
+.rchip:hover{border-color:#378ADD;background:#f0f6fd}
+.rchip.on{border-color:#378ADD;background:#E6F1FB;color:#0C447C}
+.rchip-dot{width:17px;height:17px;border:1.5px solid #D3D1C7;border-radius:50%;flex-shrink:0;background:#fff;transition:all 0.12s}
+.rchip.on .rchip-dot{border-color:#378ADD;border-width:5px}
+.otro-row{display:flex;align-items:center;gap:8px;margin-top:6px}
+.otro-row input{flex:1;font-family:'DM Sans',sans-serif;font-size:13px;color:#1a1a18;background:#f9f8f5;border:0.5px solid #D3D1C7;border-radius:10px;padding:8px 12px;outline:none}
+.otro-row input:focus{border-color:#378ADD;background:#fff}
+.otro-label{font-size:13px;color:#5F5E5A;white-space:nowrap;font-weight:500}
+.chip-group-error{font-size:11px;color:#E24B4A;margin-top:4px;display:none}
+.validation-banner{display:none;background:#FCEBEB;color:#A32D2D;border:0.5px solid #F7C1C1;border-radius:10px;padding:11px 15px;font-size:13px;margin-bottom:12px;text-align:center}
+.submit-btn{width:100%;padding:14px;background:#378ADD;color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:1.5rem;display:flex;align-items:center;justify-content:center;gap:9px;transition:background 0.15s}
+.submit-btn:hover{background:#185FA5}
+.submit-btn:active{transform:scale(0.99)}
+.submit-btn:disabled{background:#B5D4F4;cursor:not-allowed}
+.spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.err{display:none;background:#FCEBEB;color:#A32D2D;border:0.5px solid #F7C1C1;border-radius:10px;padding:11px 15px;font-size:13px;margin-top:12px;text-align:center}
+.ok-wrap{display:none;text-align:center;padding:4rem 2rem;background:#fff;border:0.5px solid #B5D4F4;border-radius:16px}
+.ok-icon{width:56px;height:56px;background:#E6F1FB;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem}
+.ok-title{font-size:18px;font-weight:500;color:#1a1a18;margin-bottom:6px}
+.ok-sub{font-size:13px;color:#888780;margin-bottom:1.5rem}
+.ok-btn{padding:10px 22px;background:none;border:0.5px solid #D3D1C7;border-radius:10px;font-size:13px;color:#5F5E5A;cursor:pointer;font-family:'DM Sans',sans-serif}
+.ok-btn:hover{background:#f5f4f0}
+</style>
+</head>
+<body>
+<div class="form-wrap">
+  <div class="form-header">
+    <div class="logo-row"><div class="logo-dot"></div><div class="logo-name">EUROCOLOR PANAMÁ</div></div>
+    <div class="form-title">Reporte de visita comercial</div>
+    <div class="form-sub">Todos los campos marcados con * son obligatorios</div>
+  </div>
+
+  <div id="fc">
+
+    <!-- SECCIÓN 1: INFORMACIÓN GENERAL -->
+    <div class="section">
+      <div class="section-title">Información general</div>
+      <div class="field-row">
+        <div class="field">
+          <label>Fecha de visita <span class="req">*</span></label>
+          <input type="date" id="f_fecha">
+          <div class="field-error-msg" id="e_fecha">Campo obligatorio</div>
+        </div>
+        <div class="field">
+          <label>Vendedor <span class="req">*</span></label>
+          <select id="f_vendedor">
+            <option value="">Seleccionar...</option>
+            <option>Rubén Mojica</option>
+            <option>Gerson Vasquez</option>
+            <option>Francisco Caraballo</option>
+          </select>
+          <div class="field-error-msg" id="e_vendedor">Campo obligatorio</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Nombre del taller <span class="req">*</span></label>
+        <input type="text" id="f_taller" placeholder="Ej. Taller Pérez">
+        <div class="field-error-msg" id="e_taller">Campo obligatorio</div>
+      </div>
+      <div class="field">
+        <label>Dirección del taller</label>
+        <input type="text" id="f_direccion" placeholder="Corregimiento, Ciudad">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Persona de contacto</label>
+          <input type="text" id="f_contacto" placeholder="Nombre completo">
+        </div>
+        <div class="field">
+          <label>Cargo del contacto</label>
+          <input type="text" id="f_cargo" placeholder="Ej. Dueño, Gerente">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Teléfono</label>
+          <input type="tel" id="f_telefono" placeholder="+507 6000-0000">
+        </div>
+        <div class="field">
+          <label>Correo electrónico</label>
+          <input type="email" id="f_email" placeholder="correo@ejemplo.com">
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 2: PERFIL DEL TALLER -->
+    <div class="section">
+      <div class="section-title">Perfil del taller</div>
+      <div class="field">
+        <label>Tipo de cliente</label>
+        <div class="radio-grid-3" id="tipo-grid"></div>
+        <div class="otro-row"><span class="otro-label">Otro:</span><input type="text" id="f_tipoOtro" placeholder="Describir..."></div>
+      </div>
+      <div class="field">
+        <label>Volumen mensual de trabajo</label>
+        <div class="radio-grid" id="volumen-grid"></div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 3: MARCAS Y PROVEEDORES -->
+    <div class="section">
+      <div class="section-title">Marcas y proveedores actuales</div>
+      <p class="fhint">Selecciona la marca que usa actualmente para cada producto</p>
+      <div class="field">
+        <label>Base</label>
+        <div class="radio-grid-3" id="base-grid"></div>
+        <div class="otro-row"><span class="otro-label">Otro:</span><input type="text" id="f_baseOtro" placeholder="Especificar..."></div>
+      </div>
+      <div class="field" style="margin-top:1rem">
+        <label>Clear</label>
+        <div class="radio-grid-3" id="clear-grid"></div>
+        <div class="otro-row"><span class="otro-label">Otro:</span><input type="text" id="f_clearOtro" placeholder="Especificar..."></div>
+      </div>
+      <div class="field" style="margin-top:1rem">
+        <label>Masilla</label>
+        <div class="radio-grid-3" id="masilla-grid"></div>
+        <div class="otro-row"><span class="otro-label">Otro:</span><input type="text" id="f_masillaOtro" placeholder="Especificar..."></div>
+      </div>
+      <div class="field" style="margin-top:1rem">
+        <label>Pintura</label>
+        <div class="radio-grid-3" id="pintura-grid"></div>
+        <div class="otro-row"><span class="otro-label">Otro:</span><input type="text" id="f_pinturaOtro" placeholder="Especificar..."></div>
+      </div>
+      <div class="field" style="margin-top:1rem">
+        <label>Lijas y pulimientos</label>
+        <div class="radio-grid-3" id="lijas-grid"></div>
+        <div class="otro-row"><span class="otro-label">Otro:</span><input type="text" id="f_lijasOtro" placeholder="Especificar..."></div>
+      </div>
+      <div class="field" style="margin-top:1rem">
+        <label>Otros productos relevantes</label>
+        <input type="text" id="f_otrosProd" placeholder="Describir otros productos y marcas">
+      </div>
+      <div class="field">
+        <label>Proveedor(es) actual(es)</label>
+        <p class="fhint">¿A quién le compra actualmente este cliente?</p>
+        <input type="text" id="f_proveedores" placeholder="Ej. Multicolor, San Cristóbal, Eurocolor...">
+      </div>
+    </div>
+
+    <!-- SECCIÓN 4: NECESIDADES -->
+    <div class="section">
+      <div class="section-title">Necesidades o retos del taller</div>
+      <div class="chip-grid" id="retos-grid"></div>
+      <div class="otro-row" style="margin-top:6px"><span class="otro-label">Otro:</span><input type="text" id="f_retosOtro" placeholder="Describir..."></div>
+    </div>
+
+    <!-- SECCIÓN 5: PRODUCTOS OFRECIDOS -->
+    <div class="section">
+      <div class="section-title">Productos ofrecidos / sugeridos</div>
+      <div class="field">
+        <label>Productos y líneas sugeridas</label>
+        <textarea id="f_prodSugeridos" rows="3" placeholder="Describe los productos y líneas que presentaste..."></textarea>
+      </div>
+      <div class="field">
+        <label>Motivo o beneficio presentado</label>
+        <textarea id="f_motivoBeneficio" rows="3" placeholder="¿Por qué le conviene al taller usar estos productos?"></textarea>
+      </div>
+      <div class="field">
+        <label>Acciones realizadas</label>
+        <div class="chip-grid" id="acciones-grid"></div>
+        <div class="otro-row" style="margin-top:6px"><span class="otro-label">Otro:</span><input type="text" id="f_accionesOtro" placeholder="Describir..."></div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 6: RESULTADOS -->
+    <div class="section">
+      <div class="section-title">Resultados de la visita</div>
+      <div class="field">
+        <label>Resultado del contacto</label>
+        <div class="radio-grid" id="resultado-grid"></div>
+        <div class="otro-row" style="margin-top:6px"><span class="otro-label">Otro:</span><input type="text" id="f_resultadoOtro" placeholder="Describir..."></div>
+      </div>
+      <div class="field">
+        <label>Potencial de venta</label>
+        <div class="radio-grid" id="potencial-grid"></div>
+      </div>
+      <div class="field">
+        <label>Potencial de compra mensual estimado (USD)</label>
+        <p class="fhint">Estimado de cuánto podría comprarle este cliente a Eurocolor por mes</p>
+        <div class="radio-grid" id="potencial-usd-grid"></div>
+      </div>
+      <div class="field">
+        <label>Próximos pasos / compromisos</label>
+        <textarea id="f_proximosPasos" rows="3" placeholder="Ej: Enviar cotización, agendar visita técnica..."></textarea>
+      </div>
+      <div class="field">
+        <label>Observaciones del vendedor</label>
+        <textarea id="f_observaciones" rows="3" placeholder="Cualquier observación adicional..."></textarea>
+      </div>
+    </div>
+
+    <div class="validation-banner" id="val-banner">Por favor completa todos los campos obligatorios marcados en rojo</div>
+    <button class="submit-btn" id="submit-btn">
+      <div class="spinner" id="spinner"></div>
+      <span id="btn-text">Enviar reporte</span>
+    </button>
+    <div class="err" id="err-msg">Hubo un error al enviar. Verifica tu conexión e intenta de nuevo.</div>
+  </div>
+
+  <div class="ok-wrap" id="ok-msg">
+    <div class="ok-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#378ADD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="ok-title">Reporte enviado correctamente</div>
+    <div class="ok-sub">Los datos fueron registrados en Google Sheets.</div>
+    <button class="ok-btn" id="new-btn">Nuevo reporte</button>
+  </div>
+</div>
+
+<script>
+var SHEET_URL='https://script.google.com/macros/s/AKfycbwG24paE_XR6sL7FXsWW4jdlNs3VfoDabNtwCBpuQ0h8hDmQ3jMS5how8ewrO7c2_Bd1Q/exec';
+
+var MARCAS_BASE_CLEAR=['Roberlo','Caralz','Sherwin','PPG','Axalta','Keda','Yesky','Innocolor','Vico','No aplica'];
+var MARCAS_MASILLA=['Roberlo','Caralz','MasterService','ZGrip','Innocolor','Axalta','Vico','Chamaleon','Speed','No aplica'];
+var MARCAS_LIJAS=['Roberlo','3M','Mirka','Vico','No aplica'];
+var TIPOS=['Chapistería y pintura','Palo de mango','Madera','Metal','Letreros','Marítimo','Aviación'];
+var VOLUMENES=['De 1 a 10 carros','De 11 a 30 carros','Más de 30 carros','No aplica'];
+var RETOS=['Problemas con igualación de colores','Tiempos de secado muy largos','Alto consumo de material','Quejas de clientes','Falta de soporte técnico','Alto costo de materiales'];
+var ACCIONES=['Presentación de línea de productos','Entrega de muestras','Cotización enviada','Programación de visita técnica','Seguimiento agendado'];
+var RESULTADOS=['Interesado','Solicita muestra / visita técnica','Solicita cotización','No interesado'];
+var POTENCIAL=['Alto — cierre probable esta semana','Medio — requiere 1-2 seguimientos más','Bajo — proceso largo','Ninguno — sin oportunidad por ahora'];
+var POTENCIAL_USD=['Menos de $200/mes','$200 - $500/mes','$500 - $1,000/mes','$1,000 - $3,000/mes','Más de $3,000/mes'];
+
+function buildRadio(cid, items, group){
+  var c=document.getElementById(cid);
+  items.forEach(function(label){
+    var d=document.createElement('div');
+    d.className='rchip';
+    d.dataset.val=label;
+    d.dataset.group=group;
+    d.innerHTML='<div class="rchip-dot"></div><span>'+label+'</span>';
+    d.addEventListener('click',function(){
+      document.querySelectorAll('.rchip[data-group="'+group+'"]').forEach(function(x){x.classList.remove('on');});
+      this.classList.add('on');
+    });
+    c.appendChild(d);
+  });
+}
+
+function buildChips(cid, items){
+  var c=document.getElementById(cid);
+  items.forEach(function(label){
+    var d=document.createElement('div');
+    d.className='chip';
+    d.dataset.val=label;
+    d.innerHTML='<div class="chip-box"><svg class="chip-check" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-5" stroke="#fff" stroke-width="1.5"/></svg></div><span>'+label+'</span>';
+    d.addEventListener('click',function(){this.classList.toggle('on');});
+    c.appendChild(d);
+  });
+}
+
+buildRadio('tipo-grid', TIPOS, 'tipo');
+buildRadio('volumen-grid', VOLUMENES, 'volumen');
+buildRadio('base-grid', MARCAS_BASE_CLEAR, 'base');
+buildRadio('clear-grid', MARCAS_BASE_CLEAR, 'clear');
+buildRadio('masilla-grid', MARCAS_MASILLA, 'masilla');
+buildRadio('pintura-grid', MARCAS_BASE_CLEAR, 'pintura');
+buildRadio('lijas-grid', MARCAS_LIJAS, 'lijas');
+buildChips('retos-grid', RETOS);
+buildChips('acciones-grid', ACCIONES);
+buildRadio('resultado-grid', RESULTADOS, 'resultado');
+buildRadio('potencial-grid', POTENCIAL, 'potencial');
+buildRadio('potencial-usd-grid', POTENCIAL_USD, 'potencialUsd');
+
+function getRadio(group){
+  var el=document.querySelector('.rchip.on[data-group="'+group+'"]');
+  return el ? el.dataset.val : '';
+}
+function getChips(cid){
+  return Array.from(document.querySelectorAll('#'+cid+' .chip.on')).map(function(el){return el.dataset.val;}).join(', ');
+}
+function g(id){return document.getElementById(id).value;}
+
+function showErr(id){
+  var el=document.getElementById(id);if(el)el.classList.add('error');
+  var em=document.getElementById('e_'+id.replace('f_',''));if(em)em.style.display='block';
+}
+function clearErr(id){
+  var el=document.getElementById(id);if(el)el.classList.remove('error');
+  var em=document.getElementById('e_'+id.replace('f_',''));if(em)em.style.display='none';
+}
+
+['fecha','vendedor','taller'].forEach(function(id){
+  var el=document.getElementById('f_'+id);
+  if(el){
+    el.addEventListener('change',function(){clearErr('f_'+id);});
+    el.addEventListener('input',function(){clearErr('f_'+id);});
+  }
+});
+
+document.getElementById('submit-btn').addEventListener('click',function(){
+  var valid=true;
+  ['fecha','vendedor','taller'].forEach(function(id){
+    if(!g('f_'+id)){showErr('f_'+id);valid=false;}
+    else clearErr('f_'+id);
+  });
+
+  if(!valid){
+    document.getElementById('val-banner').style.display='block';
+    document.querySelector('.error').scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+
+  document.getElementById('val-banner').style.display='none';
+  var btn=document.getElementById('submit-btn');
+  btn.disabled=true;
+  document.getElementById('spinner').style.display='block';
+  document.getElementById('btn-text').textContent='Enviando...';
+  document.getElementById('err-msg').style.display='none';
+
+  var payload={
+    fecha:       g('f_fecha'),
+    vendedor:    g('f_vendedor'),
+    taller:      g('f_taller'),
+    direccion:   g('f_direccion'),
+    contacto:    g('f_contacto'),
+    cargo:       g('f_cargo'),
+    telefono:    g('f_telefono'),
+    email:       g('f_email'),
+    tipoCliente: getRadio('tipo')+(g('f_tipoOtro')?' | '+g('f_tipoOtro'):''),
+    volumen:     getRadio('volumen'),
+    marcaBase:   getRadio('base')+(g('f_baseOtro')?' | '+g('f_baseOtro'):''),
+    marcaClear:  getRadio('clear')+(g('f_clearOtro')?' | '+g('f_clearOtro'):''),
+    marcaMasilla:getRadio('masilla')+(g('f_masillaOtro')?' | '+g('f_masillaOtro'):''),
+    marcaPintura:getRadio('pintura')+(g('f_pinturaOtro')?' | '+g('f_pinturaOtro'):''),
+    marcaLijas:  getRadio('lijas')+(g('f_lijasOtro')?' | '+g('f_lijasOtro'):''),
+    otrosProd:   g('f_otrosProd'),
+    proveedores: g('f_proveedores'),
+    retos:       getChips('retos-grid')+(g('f_retosOtro')?' | '+g('f_retosOtro'):''),
+    prodSugeridos:   g('f_prodSugeridos'),
+    motivoBeneficio: g('f_motivoBeneficio'),
+    acciones:    getChips('acciones-grid')+(g('f_accionesOtro')?' | '+g('f_accionesOtro'):''),
+    resultado:   getRadio('resultado')+(g('f_resultadoOtro')?' | '+g('f_resultadoOtro'):''),
+    potencial:   getRadio('potencial'),
+    potencialUsd:getRadio('potencialUsd'),
+    proximosPasos:   g('f_proximosPasos'),
+    observaciones:   g('f_observaciones')
+  };
+
+  fetch(SHEET_URL,{method:'POST',body:JSON.stringify(payload)})
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if(d.status==='ok'){
+        document.getElementById('fc').style.display='none';
+        document.getElementById('ok-msg').style.display='block';
+      } else throw new Error();
+    })
+    .catch(function(){
+      document.getElementById('err-msg').style.display='block';
+      btn.disabled=false;
+      document.getElementById('spinner').style.display='none';
+      document.getElementById('btn-text').textContent='Enviar reporte';
+    });
+});
+
+document.getElementById('new-btn').addEventListener('click',function(){
+  document.getElementById('fc').style.display='block';
+  document.getElementById('ok-msg').style.display='none';
+  document.querySelectorAll('input[type=text],input[type=tel],input[type=email],textarea').forEach(function(el){el.value='';});
+  document.querySelectorAll('input[type=date]').forEach(function(el){el.value='';});
+  document.querySelectorAll('select').forEach(function(el){el.selectedIndex=0;});
+  document.querySelectorAll('.chip.on,.rchip.on').forEach(function(el){el.classList.remove('on');});
+  document.querySelectorAll('.error').forEach(function(el){el.classList.remove('error');});
+  document.querySelectorAll('.field-error-msg,.validation-banner').forEach(function(el){el.style.display='none';});
+  document.getElementById('submit-btn').disabled=false;
+  document.getElementById('spinner').style.display='none';
+  document.getElementById('btn-text').textContent='Enviar reporte';
+  document.getElementById('f_fecha').valueAsDate=new Date();
+});
+
+document.getElementById('f_fecha').valueAsDate=new Date();
+</script>
+</body>
+</html>
